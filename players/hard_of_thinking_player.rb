@@ -58,10 +58,14 @@ class HardOfThinkingPlayer
   end
 
   def exact_match(pattern_list)
-    pattern_list.split('/').each do |pattern|
+    matches = []
+    patterns = pattern_list.split('/')
+    patterns.each_with_index do |pattern, index|
       match = exact_matches_pattern(pattern)
-      return match if match
+      matches << match if match
     end
+    return matches.join('/') if matches.length == patterns.length
+    return matches[0] if matches.length > 0
     nil
   end
 
@@ -74,5 +78,6 @@ class HardOfThinkingPlayer
     false
   end
 end
+
 
 

@@ -29,12 +29,24 @@ describe HardOfThinkingPlayer do
       @player.chars_by_frequency_for('t__n').should == {"t"=>2, "h"=>2, "n"=>2, "e"=>1, "a"=>1}
     end
 
-    it "should not find an exact match for 'th_n'" do
+    it "should not find an exact single word match for 'th_n'" do
       @player.exact_match('th_n').should be_nil
     end
 
-    it "should find an exact match for 'the_'" do
+    it "should find an exact single word match for 'the_'" do
       @player.exact_match('the_').should == 'then'
+    end
+
+    it "should find an exact single word match for 'the_/th__'" do
+      @player.exact_match('the_/th__').should == 'then'
+    end
+
+    it "should find an exact single word match for 't___/____e'" do
+      @player.exact_match('t___/____e').should == 'there'
+    end
+
+    it "should find an exact phrase match for 'the_/____e'" do
+      @player.exact_match('the_/____e').should == 'then/there'
     end
   end
 end
