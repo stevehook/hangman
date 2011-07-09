@@ -43,7 +43,7 @@ class HardOfThinkingPlayer
   end
 
   def matches_pattern_list(w, pattern_list)
-    pattern_list.split('/').each do |pattern|
+    pattern_list.split('/').select{ |p| p =~ /\_/}.each do |pattern|
       return true if matches_pattern(w, pattern)
     end
     false
