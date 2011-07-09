@@ -1,5 +1,5 @@
 class HardOfThinkingPlayer
-  attr_accessor :guesses, :words_by_length
+  attr_accessor :guesses
 
   def name
     'Steve'
@@ -68,7 +68,7 @@ class HardOfThinkingPlayer
   def exact_matches_pattern(pattern)
     matches = []
     @dictionary.select{ |w| matches_pattern_list(w, pattern) }.each do |word|
-      matches << w if pattern =~ /\_/ && matches_pattern(w, pattern)
+      matches << word if pattern =~ /\_/ && matches_pattern(word, pattern)
     end
     return matches[0] if matches.size == 1
     false
